@@ -8,7 +8,52 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="PlaceholderForeground" Value="Gray"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.25*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <TextBox PlaceholderText="Usuario"></TextBox>
+            <TextBox PlaceholderText="Contraseña"></TextBox>
+        </StackPanel>
+
+        <Button Grid.Row="2" Grid.Column="1"
+                Content="Entrar"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Background="White"
+                Foreground="Black"
+                BorderBrush="Black"
+                CornerRadius="5"
+                BorderThickness="2"
+                FontSize="25"
+                Margin="50"
+                Padding="50 10 50 10"/>
 
     </Grid>
 </Page>
