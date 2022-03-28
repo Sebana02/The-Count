@@ -116,6 +116,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="opciones.xaml.cs">
+      <DependentUpon>opciones.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Seleccion_aldea.xaml.cs">
       <DependentUpon>Seleccion_aldea.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="opciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Seleccion_aldea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

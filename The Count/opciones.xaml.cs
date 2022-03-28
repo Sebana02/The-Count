@@ -22,9 +22,15 @@ namespace The_Count
     /// </summary>
     public sealed partial class opciones : Page
     {
+        public int Volume { get; set; }
         public opciones()
         {
             this.InitializeComponent();
+        }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            
         }
     }
 }
