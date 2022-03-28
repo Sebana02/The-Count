@@ -136,7 +136,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\aldea.png" />
+    <Content Include="Assets\aspectos.png" />
     <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\opciones.png" />
+    <Content Include="Assets\skin2.png" />
+    <Content Include="Assets\skin3.png" />
+    <Content Include="Assets\skin4.png" />
     <Content Include="Assets\titulo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

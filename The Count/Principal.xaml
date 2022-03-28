@@ -22,15 +22,14 @@
         <Style x:Key="specialStyle" TargetType="Button" BasedOn="{StaticResource basicStyle}">
             <Setter Property="Padding" Value="50 20 50 20"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="25"/>
+            <Setter Property="Margin" Value="15"/>
         </Style>
 
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.25*"/>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2.5*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -43,14 +42,14 @@
 
         <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch">
             <Button Content="Selección de aldea" Style="{StaticResource specialStyle}"/>
             <Button Content="Selección de aspectos" Style="{StaticResource specialStyle}"/>
             <Button Content="Opciones" Style="{StaticResource specialStyle}"/>
         </StackPanel>
 
         <Image Source="Assets/titulo.png" Grid.Column="2"
-               VerticalAlignment="Center"/>
+               VerticalAlignment="Bottom"/>
 
 
         <Button Grid.Row="3"

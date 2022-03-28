@@ -9,42 +9,77 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style x:Key="basicStyle" TargetType="Button">
+        <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="CornerRadius" Value="5"/>
-
         </Style>
+
+        <Style x:Key="aldea" TargetType="StackPanel">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="50 10"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.25*"/>
+            <RowDefinition Height="0.75*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="75"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="75"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
+        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="7"/>
 
-        <ListView >
+        <Image Source="Assets/aldea.png" Grid.ColumnSpan="1" Grid.Column="2" VerticalAlignment="Bottom"/>
 
-        </ListView>
 
-        <Image Source="Assets/titulo.png" Grid.Column="2"
-               VerticalAlignment="Center"/>
 
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+            <StackPanel Style="{StaticResource aldea}" >
+                <TextBlock Text="Aldea 1"/>
+                <Image Source="Assets/skin4.png" MaxWidth="150"/>
+                <Button Margin="10" HorizontalAlignment="Stretch">
+                    <SymbolIcon Symbol="Home"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource aldea}">
+                <TextBlock Text="Aldea 2"/>
+                <Image Source="Assets/skin3.png" MaxWidth="150"/>
+                <Button Margin="10" HorizontalAlignment="Stretch">
+                    <SymbolIcon Symbol="Home"/>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource aldea}">
+                <TextBlock Text="Aldea 3"/>
+                <Image Source="Assets/skin4.png" MaxWidth="150"/>
+                <Button Margin="10" HorizontalAlignment="Stretch">
+                    <SymbolIcon Symbol="Home"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
 
         <Button Grid.Row="3"
-                Style="{StaticResource basicStyle}"
                 Margin="10"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch">
