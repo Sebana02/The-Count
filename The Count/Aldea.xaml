@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="The_Count.Aldea"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:The_Count"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="Assets/Aldea-hélices.jpg" Grid.ColumnSpan="10" Grid.RowSpan="3" Stretch="Fill"/>
+
+        <Button x:Name="BackButton" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Margin="35,20">
+            <Button.Content>
+                <SymbolIcon Symbol="Back"/>
+            </Button.Content>
+        </Button>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button x:Name="AttackButton" Width="60" Height="60">
+                <Button.Content>
+                    <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="TrainButton" Width="60" Height="60">
+                <Button.Content>
+                    <Image Source="Assets/train-Button.png" Stretch="Uniform"/>
+
+                </Button.Content>
+            </Button>
+            
+        </StackPanel>
+    </Grid>
+</Page>

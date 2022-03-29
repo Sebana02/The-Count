@@ -116,6 +116,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Aldea.xaml.cs">
+      <DependentUpon>Aldea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="opciones.xaml.cs">
       <DependentUpon>opciones.xaml</DependentUpon>
     </Compile>
@@ -139,14 +142,34 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Aldea-hélices.jpg" />
     <Content Include="Assets\aldea.png" />
     <Content Include="Assets\aspectos.png" />
+    <Content Include="Assets\ataque.PNG" />
+    <Content Include="Assets\Attack-Button.png" />
     <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\busqueda.PNG" />
+    <Content Include="Assets\Captura.PNG" />
+    <Content Include="Assets\chat.PNG" />
+    <Content Include="Assets\constr.PNG" />
+    <Content Include="Assets\entrena.PNG" />
+    <Content Include="Assets\gota.png" />
+    <Content Include="Assets\Login.png" />
+    <Content Include="Assets\moneda.png" />
+    <Content Include="Assets\noti.PNG" />
+    <Content Include="Assets\notis.PNG" />
     <Content Include="Assets\opciones.png" />
+    <Content Include="Assets\oro.png" />
+    <Content Include="Assets\pobacion.PNG" />
+    <Content Include="Assets\sangre.PNG" />
+    <Content Include="Assets\skin1.png" />
     <Content Include="Assets\skin2.png" />
     <Content Include="Assets\skin3.png" />
     <Content Include="Assets\skin4.png" />
+    <Content Include="Assets\skins.PNG" />
     <Content Include="Assets\titulo.png" />
+    <Content Include="Assets\train-button.png" />
+    <Content Include="Assets\tropa.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -161,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Aldea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="opciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
