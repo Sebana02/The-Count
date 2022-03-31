@@ -38,11 +38,27 @@
         <Image Source="Assets/Aldea-hélices.jpg" Grid.ColumnSpan="10" Grid.RowSpan="3" Stretch="Fill"/>
 
         <Button x:Name="BackButton" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                Margin="35,20">
+                Margin="30,10" Width="60" Height="60">
             <Button.Content>
-                <SymbolIcon Symbol="Back"/>
+                <SymbolIcon Symbol="Back" RenderTransformOrigin="0.5,0.5">
+                    <SymbolIcon.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </SymbolIcon.RenderTransform>
+                </SymbolIcon>
             </Button.Content>
         </Button>
+
+        <Button x:Name="ConfigButton" Grid.Row="2" Grid.Column="6" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Width="60" Height="60"  Margin="30,10">
+            <Button.Content>
+                <SymbolIcon Symbol="Setting" RenderTransformOrigin="0.5,0.5">
+                    <SymbolIcon.RenderTransform>
+                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                    </SymbolIcon.RenderTransform>
+                </SymbolIcon>
+            </Button.Content>
+        </Button>
+
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Button x:Name="AttackButton" Width="60" Height="60">
                 <Button.Content>
@@ -52,10 +68,32 @@
             <Button x:Name="TrainButton" Width="60" Height="60">
                 <Button.Content>
                     <Image Source="Assets/train-Button.png" Stretch="Uniform"/>
-
                 </Button.Content>
             </Button>
-            
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="ChatButton" Width="60" Height="60"
+                    Margin=" 0,0,0,0">
+                <Button.Content>
+                    <SymbolIcon Symbol="Message" RenderTransformOrigin="0.5,0.5">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform ScaleX="2" ScaleY="2"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button.Content>
+            </Button>
+            <Button x:Name="NewsButton" Width="60" Height="60"
+                     Margin=" 32.5,0,0,0">
+                <Button.Content>
+                    <SymbolIcon Symbol="Mail" RenderTransformOrigin="0.5,0.5">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform ScaleX="2" ScaleY="2"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button.Content>
+            </Button>
+
         </StackPanel>
     </Grid>
 </Page>
