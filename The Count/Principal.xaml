@@ -23,7 +23,7 @@
             <Setter Property="Padding" Value="50 20 50 20"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Margin" Value="15"/>
-        </Style>
+       </Style>
 
     </Page.Resources>
     <Grid>

@@ -50,12 +50,13 @@
 
 
         <StackPanel  VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"
+                     Width="500">
 
             <StackPanel Style="{StaticResource stackp}">
                 <SymbolIcon Symbol="Volume" Foreground="Black"/>
-                <Slider Width="270" Padding="10 0" Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged"></Slider>
-                <TextBlock Text="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 0"/>
+                <Slider HorizontalAlignment="Stretch" Padding="10 0" Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged"></Slider>
+                <TextBlock Text="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="10 0"/>
             </StackPanel>
 
             <StackPanel  Style="{StaticResource stackp}">
