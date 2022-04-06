@@ -49,25 +49,28 @@
 
 
 
-        <StackPanel  VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"
-                     Width="500">
+        <StackPanel  VerticalAlignment="Center" MaxWidth="750" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1">
 
             <StackPanel Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="Volume" Foreground="Black"/>
-                <Slider HorizontalAlignment="Stretch" Padding="10 0" Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged"></Slider>
-                <TextBlock Text="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="10 0"/>
+                <SymbolIcon Symbol="Volume" Foreground="Black" HorizontalAlignment="Left" Margin="10"/>
+                <Slider MinWidth="400" Padding="10 0" Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center" Margin="10"/>
+                <TextBlock Text="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10"/>
             </StackPanel>
 
             <StackPanel  Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="Globe" Foreground="Black"/>
-                <ListBox>
-                   
-                </ListBox>
+                <SymbolIcon Symbol="Globe" Foreground="Black" Margin="10"/>
+                <ComboBox VerticalAlignment="Center" Width="400" Height="50">
+                    <ComboBoxItem>Horizontal</ComboBoxItem>
+                    <ComboBoxItem>Vertical</ComboBoxItem>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel  Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="SlideShow" Foreground="Black"/>
+                <SymbolIcon Symbol="SlideShow" Foreground="Black" Margin="10"/>
+                <ComboBox VerticalAlignment="Center" Width="400" Height="50" >
+                    <ComboBoxItem>Horizontal</ComboBoxItem>
+                    <ComboBoxItem>Vertical</ComboBoxItem>
+                </ComboBox>
             </StackPanel>
 
         </StackPanel>
