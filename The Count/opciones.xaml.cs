@@ -32,5 +32,11 @@ namespace The_Count
         {
             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+                Frame.GoBack();
+        }
     }
 }

@@ -7,24 +7,52 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Page.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="BorderThickness" Value="2"/>
+
+        <Style x:Key="basic" TargetType="Control">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="PlaceholderForeground" Value="Gray"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="FontSize" Value="25"/>
+        </Style>
+        
+        <Style x:Key="small" TargetType="Control" BasedOn="{StaticResource basic}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="5"/>
+
+        </Style>
+
+        <Style x:Key="big" TargetType="Control" BasedOn="{StaticResource basic}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="20"/>
             <Setter Property="Padding" Value="20"/>
-            <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="CornerRadius" Value="10"/>
+
         </Style>
 
     </Page.Resources>
-
     <Grid>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="500" MinWindowWidth="650"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="user.Style" Value="{StaticResource big}" />
+                        <Setter Target="password.Style" Value="{StaticResource big}" />
+                        <Setter Target="enter.FontSize" Value="20" />
+                        <Setter Target="enter.Padding" Value="50 10 50 10" />
+                        <Setter Target="enter.Margin" Value="50" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1.5*"/>
@@ -36,25 +64,30 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+        <Image Source="Assets/background.jpg" Stretch="Fill" 
+               Grid.RowSpan="3" Grid.ColumnSpan="3"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" >
-            <TextBox PlaceholderText="Usuario"></TextBox>
-            <TextBox PlaceholderText="Contraseña"></TextBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Stretch" >
+            <TextBox x:Name="user" PlaceholderText="Usuario" 
+                PlaceholderForeground="Gray" 
+                Style="{StaticResource small}"></TextBox>
+            
+            <PasswordBox x:Name="password" PlaceholderText="Contraseña" PasswordChar="*"
+                Style="{StaticResource small}"></PasswordBox>
+            
         </StackPanel>
 
-        <Button Grid.Row="2" Grid.Column="1"
+        <Button x:Name="enter"
+                Style="{StaticResource basic}"
+                Grid.Row="2" Grid.Column="1"
                 Content="Entrar"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center"
-                Background="White"
-                Foreground="Black"
-                BorderBrush="Black"
-                CornerRadius="5"
-                BorderThickness="2"
-                FontSize="25"
-                Margin="50"
-                Padding="50 10 50 10"/>
+                VerticalAlignment="Top" HorizontalAlignment="Center"
+                CornerRadius="5" BorderThickness="2"
+                FontSize="10"
+                Margin="10"
+                Padding="10 2 10 2"
+                Click="Button_Click"/>
 
         <Image Source="Assets/titulo.png" Grid.Column="1"
                VerticalAlignment="Bottom"/>

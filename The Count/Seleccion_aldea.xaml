@@ -9,84 +9,115 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="BorderThickness" Value="2"/>
+        <Style x:Key="basic" TargetType="Control">
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
-        <Style x:Key="aldea" TargetType="StackPanel">
+        <Style x:Key="aldea" TargetType="StackPanel" >
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="50 10"/>
             <Setter Property="CornerRadius" Value="10"/>
             <Setter Property="Margin" Value="25"/>
         </Style>
 
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="Black"/>
+        <Style TargetType="TextBlock" >
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
 
+
+        <Style x:Key="smallButton" TargetType="Control" BasedOn="{StaticResource basic}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+
+        <Style x:Key="bigButton" TargetType="Control" BasedOn="{StaticResource basic}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
     </Page.Resources>
     <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="500" MinWindowWidth="650"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="0.75*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="75"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="7"/>
+        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
 
-        <Image Source="Assets/aldea.png" Grid.ColumnSpan="1" Grid.Column="2" VerticalAlignment="Bottom"/>
+        <Image Source="Assets/aldea.png" Grid.ColumnSpan="1" Grid.Column="1" VerticalAlignment="Bottom"/>
 
 
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+                    HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
             <StackPanel Style="{StaticResource aldea}" >
                 <TextBlock Text="Aldea 1"/>
-                <Image Source="Assets/skin4.png" MaxWidth="150"/>
-                <Button Margin="10" HorizontalAlignment="Stretch">
+                <Image Source="Assets/skin4.png" />
+                <Button Style="{StaticResource smallButton}" Click="Button_Click">
                     <SymbolIcon Symbol="Home"/>
                 </Button>
             </StackPanel>
 
             <StackPanel Style="{StaticResource aldea}">
                 <TextBlock Text="Aldea 2"/>
-                <Image Source="Assets/skin3.png" MaxWidth="150"/>
-                <Button Margin="10" HorizontalAlignment="Stretch">
+                <Image Source="Assets/skin3.png" />
+                <Button Style="{StaticResource smallButton}" Click="Button_Click">
                     <SymbolIcon Symbol="Home"/>
                 </Button>
             </StackPanel>
 
             <StackPanel Style="{StaticResource aldea}">
                 <TextBlock Text="Aldea 3"/>
-                <Image Source="Assets/skin4.png" MaxWidth="150"/>
-                <Button Margin="10" HorizontalAlignment="Stretch">
+                <Image Source="Assets/skin4.png"/>
+                <Button Style="{StaticResource smallButton}" Click="Button_Click">
                     <SymbolIcon Symbol="Home"/>
                 </Button>
             </StackPanel>
         </StackPanel>
 
-        <Button Grid.Row="3"
+        <Button Grid.Row="1"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Width="50"
+                Height="50"
+                Padding="10"
                 Margin="10"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch">
+                CornerRadius="10"
+                Style="{StaticResource basic}"
+                Click="Button_Click_1">
 
             <SymbolIcon Symbol="Back" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False"  d:LayoutRounding="Auto">
                 <SymbolIcon.RenderTransform>
-                    <CompositeTransform  ScaleX="2" ScaleY="2"/>
+                    <CompositeTransform  ScaleX="1.5" ScaleY="1.5"/>
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>

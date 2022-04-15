@@ -26,5 +26,11 @@ namespace The_Count
         {
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (user.Text.Length > 0 && password.Password.Length > 0) //solo si se ha introducido user y contrasenya
+                Frame.Navigate(typeof(Principal));
+        }
     }
 }

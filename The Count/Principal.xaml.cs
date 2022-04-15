@@ -26,5 +26,25 @@ namespace The_Count
         {
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Exit();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Seleccion_Aldea));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //skin
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(opciones));
+        }
     }
 }
