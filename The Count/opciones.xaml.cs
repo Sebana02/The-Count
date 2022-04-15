@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,7 +23,7 @@ namespace The_Count
     /// </summary>
     public sealed partial class opciones : Page
     {
-        public int Volume { get; set; }
+        public string[] resolutions = { "480p", "720p", "1080p" };
         public opciones()
         {
             this.InitializeComponent();
@@ -30,7 +31,7 @@ namespace The_Count
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            
+            volumeText.Text = (sender as Slider).Value.ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -9,82 +9,108 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="BorderThickness" Value="2"/>
+
+        <Style TargetType="StackPanel" x:Key="spSmall">
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="CornerRadius"  Value="3"/>
+            <Setter Property="Padding"  Value="2"/>
+            <Setter Property="Margin"  Value="2"/>
         </Style>
 
-        <Style TargetType="StackPanel" x:Key="stackp">
+        <Style TargetType="StackPanel" x:Key="spBig">
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius"  Value="5"/>
             <Setter Property="Padding"  Value="10"/>
             <Setter Property="Margin"  Value="10"/>
         </Style>
 
+
     </Page.Resources>
     <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="500" MinWindowWidth="650"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="volumeSP.Style" Value="{StaticResource spBig}"/>
+                        <Setter Target="volumeText.Margin" Value="15"/>
+                        <Setter Target="slider.Width" Value="200"/>
+                        <Setter Target="s1.Margin" Value="15"/>
+
+                        <Setter Target="langSp.Style" Value="{StaticResource spBig}"/>
+                        <Setter Target="s2.Margin" Value="15"/>   
+                        <Setter Target="cb1.Width" Value="200"/>   
+                        <Setter Target="cb1.Height" Value="50"/>   
+                        
+                        <Setter Target="resSp.Style" Value="{StaticResource spBig}"/>
+                        <Setter Target="s3.Margin" Value="15"/>
+                        <Setter Target="cb2.Width" Value="200"/>
+                        <Setter Target="cb2.Height" Value="50"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="0.75*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="75"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="7"/>
+        <Image Source="Assets/background.jpg" Stretch="Fill" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
 
-        <Image Source="Assets/opciones.png" Grid.ColumnSpan="1" Grid.Column="2" VerticalAlignment="Bottom"/>
+        <Image Source="Assets/opciones.png" Grid.ColumnSpan="1" Grid.Column="1" VerticalAlignment="Bottom"/>
 
+        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
 
-
-        <StackPanel  VerticalAlignment="Center" MaxWidth="750" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1">
-
-            <StackPanel Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="Volume" Foreground="Black" HorizontalAlignment="Left" Margin="10"/>
-                <Slider MinWidth="400" Padding="10 0" Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center" Margin="10"/>
-                <TextBlock Text="0" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10"/>
+            <StackPanel Style="{StaticResource spSmall}" x:Name="volumeSP" Orientation="Horizontal">
+                <SymbolIcon VerticalAlignment="Center" x:Name="s1" Symbol="Volume"/>
+                <Slider VerticalAlignment="Center" Margin="5" Width="100" x:Name="slider"  Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged"/>
+                <TextBlock  VerticalAlignment="Center" Margin="5" Text="0" x:Name="volumeText" Foreground="Black" />
             </StackPanel>
 
-            <StackPanel  Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="Globe" Foreground="Black" Margin="10"/>
-                <ComboBox VerticalAlignment="Center" Width="400" Height="50">
-                    <ComboBoxItem>Horizontal</ComboBoxItem>
-                    <ComboBoxItem>Vertical</ComboBoxItem>
+            <StackPanel  Style="{StaticResource spSmall}" x:Name="langSp" Orientation="Horizontal">
+                <SymbolIcon  VerticalAlignment="Center" x:Name="s2" Symbol="Globe"/>
+                <ComboBox x:Name="cb1" VerticalAlignment="Center" Margin="5" Width="100" Height="35">
+                    <ComboBoxItem IsSelected="True">Español</ComboBoxItem>
+                    <ComboBoxItem>Inglés</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel  Style="{StaticResource stackp}">
-                <SymbolIcon Symbol="SlideShow" Foreground="Black" Margin="10"/>
-                <ComboBox VerticalAlignment="Center" Width="400" Height="50" >
-                    <ComboBoxItem>Horizontal</ComboBoxItem>
-                    <ComboBoxItem>Vertical</ComboBoxItem>
-                </ComboBox>
+            <StackPanel  Style="{StaticResource spSmall}" x:Name="resSp" Orientation="Horizontal">
+                <SymbolIcon VerticalAlignment="Center" x:Name="s3" Symbol="SlideShow" />
+                <ComboBox x:Name="cb2" VerticalAlignment="Center" Margin="5" Width="100" Height="35" 
+                          ItemsSource="{x:Bind resolutions}"
+                          SelectedItem="{x:Bind resolutions[1]}"/>
             </StackPanel>
 
         </StackPanel>
 
 
-        <Button Grid.Row="3"
-                Margin="10"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
+        <Button Grid.Row="1"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Width="50" Height="50"
+                Padding="10" Margin="10"
+                CornerRadius="10"
+                BorderBrush="Black" Foreground="Black" Background="White"
                 Click="Button_Click">
+
 
             <SymbolIcon Symbol="Back" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False"  d:LayoutRounding="Auto">
                 <SymbolIcon.RenderTransform>
-                    <CompositeTransform  ScaleX="2" ScaleY="2"/>
+                    <CompositeTransform  ScaleX="1.5" ScaleY="1.5"/>
                 </SymbolIcon.RenderTransform>
             </SymbolIcon>
         </Button>
