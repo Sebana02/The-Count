@@ -39,7 +39,7 @@ namespace The_Count
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //skin
+            Frame.Navigate(typeof(Seleccion_aspecto));
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

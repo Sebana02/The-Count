@@ -119,6 +119,7 @@
     <Compile Include="Aldea.xaml.cs">
       <DependentUpon>Aldea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="opciones.xaml.cs">
       <DependentUpon>opciones.xaml</DependentUpon>
     </Compile>
@@ -135,6 +136,9 @@
       <DependentUpon>Principal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seleccion_aspecto.xaml.cs">
+      <DependentUpon>Seleccion_aspecto.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -201,6 +205,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Principal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Seleccion_aspecto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
