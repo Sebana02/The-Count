@@ -20,6 +20,7 @@
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
         
         

@@ -76,13 +76,13 @@
         <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
 
             <StackPanel Style="{StaticResource spSmall}" x:Name="volumeSP" Orientation="Horizontal">
-                <SymbolIcon VerticalAlignment="Center" x:Name="s1" Symbol="Volume"/>
+                <SymbolIcon  Foreground="Black" VerticalAlignment="Center" x:Name="s1" Symbol="Volume"/>
                 <Slider VerticalAlignment="Center" Margin="5" Width="100" x:Name="slider"  Background="Gray" Foreground="Black" ValueChanged="Slider_ValueChanged"/>
                 <TextBlock  VerticalAlignment="Center" Margin="5" Text="0" x:Name="volumeText" Foreground="Black" />
             </StackPanel>
 
             <StackPanel  Style="{StaticResource spSmall}" x:Name="langSp" Orientation="Horizontal">
-                <SymbolIcon  VerticalAlignment="Center" x:Name="s2" Symbol="Globe"/>
+                <SymbolIcon Foreground="Black" VerticalAlignment="Center" x:Name="s2" Symbol="Globe"/>
                 <ComboBox x:Name="cb1" VerticalAlignment="Center" Margin="5" Width="100" Height="35">
                     <ComboBoxItem IsSelected="True">Español</ComboBoxItem>
                     <ComboBoxItem>Inglés</ComboBoxItem>
@@ -90,7 +90,7 @@
             </StackPanel>
 
             <StackPanel  Style="{StaticResource spSmall}" x:Name="resSp" Orientation="Horizontal">
-                <SymbolIcon VerticalAlignment="Center" x:Name="s3" Symbol="SlideShow" />
+                <SymbolIcon Foreground="Black" VerticalAlignment="Center" x:Name="s3" Symbol="SlideShow" />
                 <ComboBox x:Name="cb2" VerticalAlignment="Center" Margin="5" Width="100" Height="35" 
                           ItemsSource="{x:Bind resolutions}"
                           SelectedItem="{x:Bind resolutions[1]}"/>
