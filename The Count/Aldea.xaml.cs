@@ -31,5 +31,10 @@ namespace The_Count
         {
 
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Seleccion_Aldea));
+        }
     }
 }
