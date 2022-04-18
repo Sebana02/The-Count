@@ -139,6 +139,7 @@
     <Compile Include="Seleccion_aspecto.xaml.cs">
       <DependentUpon>Seleccion_aspecto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SkinLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

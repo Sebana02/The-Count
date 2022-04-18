@@ -17,10 +17,7 @@ namespace The_Count
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected bool Set<T>(
-        ref T field,
-        T newValue,
-        [CallerMemberName] string propertyName = null)
+        protected bool Set<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, newValue))
             {
