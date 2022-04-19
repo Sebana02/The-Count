@@ -30,7 +30,20 @@ namespace The_Count
             this.InitializeComponent();
             Window.Current.CoreWindow.SizeChanged += (sender, e) =>
              {
-                 moveConstruct();               
+                 if (constructTimer == null)
+                 {
+                     if (constructOpen)
+                     {
+                         sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+                         ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp1.ActualWidth);
+                     }
+                     else
+                     {
+                         sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
+                         ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+                     }
+                 }
+                 
 
              };
 
@@ -57,7 +70,7 @@ namespace The_Count
 
         private void ContructButton_Click(object sender, RoutedEventArgs e)
         {
-            moveConstruct();
+           moveConstruct();
         }
 
         private void moveConstruct() {
