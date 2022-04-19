@@ -70,18 +70,24 @@
                 <Button.Content>
                     <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
                 </Button.Content>
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
             </Button>
-            <Button x:Name="TrainButton"  MinHeight="60">
+            <Button x:Name="TrainButton"  MinHeight="60" Click="TrainButton_Click">
                 <Button.Content>
                     <Image Source="Assets/train-Button.png" Stretch="Uniform"/>
                 </Button.Content>
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
             </Button>
         </StackPanel>
-        <StackPanel x:Name="sp2"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+        <StackPanel x:Name="sp2"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" 
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
                     CornerRadius="5"  Background="White">
             <StackPanel.RenderTransform>
-                <CompositeTransform TranslateX="-475"></CompositeTransform>
+                <CompositeTransform ></CompositeTransform>
             </StackPanel.RenderTransform>
         </StackPanel>
         
@@ -101,7 +107,7 @@
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
                     CornerRadius="5" Background="White">
             <StackPanel.RenderTransform>
-                <CompositeTransform TranslateX="{x:Bind ActualWidth}"></CompositeTransform>
+                <CompositeTransform></CompositeTransform>
             </StackPanel.RenderTransform>
         </StackPanel>
 

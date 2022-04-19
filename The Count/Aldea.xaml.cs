@@ -23,39 +23,23 @@ namespace The_Count
     /// </summary>
     public sealed partial class Aldea : Page
     {
-        bool constructOpen = false;
-        DispatcherTimer constructTimer;
+        bool constructOpen = false, trainOpen = false;
+        DispatcherTimer constructTimer, trainTiemr;
         public Aldea()
         {
             this.InitializeComponent();
-            Window.Current.CoreWindow.SizeChanged += (sender, e) =>
-             {
-                 if (constructTimer == null)
-                 {
-                     if (constructOpen)
-                     {
-                         sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
-                         ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp1.ActualWidth);
-                     }
-                     else
-                     {
-                         sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
-                         ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
-                     }
-                 }
-                 
+            Window.Current.CoreWindow.SizeChanged += OnWindowSizeChanged;
 
-             };
-
-            Loaded += (s,e) =>
+            Loaded += (s, e) =>
             {
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
+                sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
             };
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
         {
-
+            moveTrain();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -70,24 +54,25 @@ namespace The_Count
 
         private void ContructButton_Click(object sender, RoutedEventArgs e)
         {
-           moveConstruct();
+            moveConstruct();
         }
 
-        private void moveConstruct() {
+        private void moveConstruct()
+        {
             if (constructTimer != null) return;
 
             if (constructOpen)
             {
                 constructTimer = new DispatcherTimer();
                 constructTimer.Tick += moveConstructOut;
-                constructTimer.Interval = new TimeSpan(1000); //100000*10^-7s=1cs;
+                constructTimer.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
                 constructTimer.Start();
             }
             else
             {
                 constructTimer = new DispatcherTimer();
                 constructTimer.Tick += moveConstructIn;
-                constructTimer.Interval = new TimeSpan(1000); //100000*10^-7s=1cs;
+                constructTimer.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
                 constructTimer.Start();
             }
 
@@ -101,7 +86,7 @@ namespace The_Count
             {
                 constructTimer.Stop();
                 constructTimer = null;
-               
+
             }
 
             else
@@ -126,6 +111,107 @@ namespace The_Count
             {
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, pos - 5);
                 ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)ContructButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) - 5);
+            }
+        }
+
+        private void moveTrain()
+        {
+            if (trainTiemr != null) return;
+
+            if (trainOpen)
+            {
+                trainTiemr = new DispatcherTimer();
+                trainTiemr.Tick += moveTrainOut;
+                trainTiemr.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
+                trainTiemr.Start();
+            }
+            else
+            {
+                trainTiemr = new DispatcherTimer();
+                trainTiemr.Tick += moveTrainIn;
+                trainTiemr.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
+                trainTiemr.Start();
+            }
+
+            trainOpen = !trainOpen;
+        }
+        private void moveTrainOut(object sender, object e)
+        {
+            var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
+
+            if (pos <= -sp2.ActualWidth)
+            {
+                trainTiemr.Stop();
+                trainTiemr = null;
+
+            }
+
+            else
+            {
+                sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, pos - 5);
+                TrainButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)TrainButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) - 5);
+                AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)AttackButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) - 5);
+            }
+
+        }
+        private void moveTrainIn(object sender, object e)
+        {
+            var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
+
+            if (pos >= 0)
+            {
+                trainTiemr.Stop();
+                trainTiemr = null;
+
+            }
+
+            else
+            {
+                sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, pos + 5);
+                TrainButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)TrainButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
+                AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)AttackButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
+            }
+        }
+
+        private void OnWindowSizeChanged(object sender,Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (constructTimer != null)
+            {
+                constructTimer.Stop();
+                constructTimer = null;
+
+            }
+
+            if (constructOpen)
+            {
+                sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+                ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp1.ActualWidth);
+            }
+            else
+            {
+                sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
+                ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+            }
+
+
+
+            if (trainTiemr != null)
+            {
+                trainTiemr.Stop();
+                trainTiemr = null;
+
+            }
+            if (trainOpen)
+            {
+                sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+                TrainButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp2.ActualWidth);
+                AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp2.ActualWidth);
+            }
+            else
+            {
+                sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
+                TrainButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
+                AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
             }
         }
     }
