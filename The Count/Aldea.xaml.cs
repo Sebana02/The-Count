@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,21 @@ namespace The_Count
     /// </summary>
     public sealed partial class Aldea : Page
     {
+        bool constructOpen = false;
+        DispatcherTimer constructTimer;
         public Aldea()
         {
             this.InitializeComponent();
+            Window.Current.CoreWindow.SizeChanged += (sender, e) =>
+             {
+                 moveConstruct();               
+
+             };
+
+            Loaded += (s,e) =>
+            {
+                sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
+            };
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
@@ -35,6 +48,72 @@ namespace The_Count
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Seleccion_Aldea));
+        }
+
+        private void ConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(opciones));
+        }
+
+        private void ContructButton_Click(object sender, RoutedEventArgs e)
+        {
+            moveConstruct();
+        }
+
+        private void moveConstruct() {
+            if (constructTimer != null) return;
+
+            if (constructOpen)
+            {
+                constructTimer = new DispatcherTimer();
+                constructTimer.Tick += moveConstructOut;
+                constructTimer.Interval = new TimeSpan(1000); //100000*10^-7s=1cs;
+                constructTimer.Start();
+            }
+            else
+            {
+                constructTimer = new DispatcherTimer();
+                constructTimer.Tick += moveConstructIn;
+                constructTimer.Interval = new TimeSpan(1000); //100000*10^-7s=1cs;
+                constructTimer.Start();
+            }
+
+            constructOpen = !constructOpen;
+        }
+        private void moveConstructOut(object sender, object e)
+        {
+            var pos = (double)sp1.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
+
+            if (pos >= sp1.ActualWidth)
+            {
+                constructTimer.Stop();
+                constructTimer = null;
+               
+            }
+
+            else
+            {
+                sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, pos + 5);
+                ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)ContructButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
+            }
+
+        }
+        private void moveConstructIn(object sender, object e)
+        {
+            var pos = (double)sp1.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
+
+            if (pos <= 0)
+            {
+                constructTimer.Stop();
+                constructTimer = null;
+
+            }
+
+            else
+            {
+                sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, pos - 5);
+                ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)ContructButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) - 5);
+            }
         }
     }
 }
