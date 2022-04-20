@@ -24,18 +24,20 @@ namespace The_Count
     public sealed partial class Aldea : Page
     {
         bool constructOpen = false, trainOpen = false;
-        bool notifOut = false;
+        bool notifOut = false, chatOut = false;
         DispatcherTimer constructTimer, trainTiemr;
         public Aldea()
         {
             this.InitializeComponent();
             Window.Current.CoreWindow.SizeChanged += OnWindowSizeChanged;
-
+            AddItemToEndChat("Hola!");
             Loaded += (s, e) =>
             {
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
                 sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
             };
+
+           
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
@@ -61,6 +63,32 @@ namespace The_Count
         {
             notifOut = !notifOut;
             Notificaciones.Visibility = notifOut ? Visibility.Visible : Visibility.Collapsed;
+            MenuBackground.Visibility = notifOut ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ChatButton_Click(object sender, RoutedEventArgs e)
+        {
+            chatOut = !chatOut;
+            ChatGrid.Visibility = chatOut ? Visibility.Visible : Visibility.Collapsed;
+        }
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage();
+        }
+
+        private void ChatBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                SendMessage();
+            }
+        }
+        private void SendMessage()
+        {
+            string text = ChatBox.Text;
+            if (text == "" || text == null) return;
+            AddItemToEndChat(text);
+            ChatBox.Text = "";
         }
 
         private void moveConstruct()
@@ -119,7 +147,6 @@ namespace The_Count
                 ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)ContructButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) - 5);
             }
         }
-
         private void moveTrain()
         {
             if (trainTiemr != null) return;
@@ -161,7 +188,6 @@ namespace The_Count
 
         }
 
-        
 
         private void moveTrainIn(object sender, object e)
         {
@@ -181,7 +207,6 @@ namespace The_Count
                 AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)AttackButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
             }
         }
-
         private void OnWindowSizeChanged(object sender,Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
             if (constructTimer != null)
@@ -222,6 +247,10 @@ namespace The_Count
                 TrainButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
                 AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
             }
+        }
+        private void AddItemToEndChat(string msg)
+        {
+            ChatPanel.Items.Add(new Mensaje(msg, DateTime.Now, HorizontalAlignment.Right));
         }
     }
 }
