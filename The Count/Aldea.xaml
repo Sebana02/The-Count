@@ -38,8 +38,10 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
+        <!--Fondo-->
         <Image Source="Assets/Aldea-hélices.jpg" Grid.ColumnSpan="10" Grid.RowSpan="3" Stretch="Fill"/>
 
+        <!--Boton de vuelta atras-->
         <Button x:Name="BackButton" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="BackButton_Click">
             <Button.Content>
                 <SymbolIcon Symbol="Back" RenderTransformOrigin="0.5,0.5">
@@ -50,6 +52,7 @@
             </Button.Content>
         </Button>
 
+        <!--Boton de configuracion-->
         <Button x:Name="ConfigButton" Grid.Row="2" Grid.Column="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
         Click="ConfigButton_Click">
             <Button.Content>
@@ -61,59 +64,8 @@
             </Button.Content>
 
         </Button>
-
-        
-        
-        
-        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0">
-            <Button x:Name="AttackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="60" MinWidth="60">
-                <Button.Content>
-                    <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
-                </Button.Content>
-                <Button.RenderTransform>
-                    <CompositeTransform/>
-                </Button.RenderTransform>
-            </Button>
-            <Button x:Name="TrainButton"  MinHeight="60" Click="TrainButton_Click">
-                <Button.Content>
-                    <Image Source="Assets/train-Button.png" Stretch="Uniform"/>
-                </Button.Content>
-                <Button.RenderTransform>
-                    <CompositeTransform/>
-                </Button.RenderTransform>
-            </Button>
-        </StackPanel>
-        <StackPanel x:Name="sp2"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" 
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
-                    CornerRadius="5"  Background="White">
-            <StackPanel.RenderTransform>
-                <CompositeTransform ></CompositeTransform>
-            </StackPanel.RenderTransform>
-        </StackPanel>
-        
-        
-        
-
-
-        <Button Click="ContructButton_Click" x:Name="ContructButton" Grid.Row="1" Grid.Column="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0,0,0" MinHeight="60">
-            <Button.Content>
-                <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
-            </Button.Content>
-            <Button.RenderTransform>
-                <CompositeTransform/>
-            </Button.RenderTransform>
-        </Button>
-        <StackPanel x:Name="sp1"  Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="3" 
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
-                    CornerRadius="5" Background="White">
-            <StackPanel.RenderTransform>
-                <CompositeTransform></CompositeTransform>
-            </StackPanel.RenderTransform>
-        </StackPanel>
-
-        
-        
-        
+            
+        <!--Boton de chat-->
         <Button x:Name="ChatButton"
                 Grid.Row="2" Grid.Column="7"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -126,9 +78,42 @@
             </Button.Content>
         </Button>
 
+        <!--Panel de chat-->
+        <ListView x:Name="Chat" Background="White" Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="1" Visibility="Collapsed">
+            <!-- The ItemsStackPanel must be edited to update the following two properties -->
+            <!-- These properties allow the list to grow from the bottom -->
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"
+                              VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <!-- This setter property is created so ListViewItems correctly align to the left or right. -->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <DataTemplate  x:DataType="local:Mensaje">
+                <Grid Height="Auto" Margin="4" HorizontalAlignment="{x:Bind MsgAlignment}">
+                    
+                    <StackPanel MinHeight="75" Width="350" Padding="10, 0, 0, 10" Background="Blue" CornerRadius="{StaticResource ControlCornerRadius}">
+                        <TextBlock Text="{x:Bind MsgText}" Padding="0, 10, 0, 0" FontSize="20" Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"/>
+                        <TextBlock Text="{x:Bind MsgDateTime}" Padding="0, 0, 0, 10" FontSize="15" Foreground="{ThemeResource SystemControlForegroundAltMediumHighBrush}"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </DataTemplate>
+        </ListView>
+
+
+        <!--Boton de noticias-->
         <Button x:Name="NewsButton"
                 Grid.Row="2" Grid.Column="6"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Click="NewsButton_Click">
             <Button.Content>
                 <SymbolIcon Symbol="Mail" RenderTransformOrigin="0.5,0.5">
                     <SymbolIcon.RenderTransform>
@@ -138,58 +123,120 @@
             </Button.Content>
         </Button>
 
+        <!--Opacidad del fondo para el menu-->
         <Rectangle x:Name="MenuBackground" Fill="Black" Opacity="0.7" Visibility="Collapsed"  Grid.ColumnSpan="10" Grid.RowSpan="10"/>
+       
+        <!--Menu de noticias-->
+        <GridView x:Name="Notificaciones" ItemsSource="123456789ABCD" Background="White" Grid.Column="3"  Grid.ColumnSpan="3" Grid.Row="1" Visibility="Collapsed"/>
 
+        <!--Boton de entrenamiento y mejoras-->
+        <Button Click="ContructButton_Click" x:Name="ContructButton" Grid.Row="1" Grid.Column="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0,0,0" MinHeight="60">
+            <Button.Content>
+                <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
+            </Button.Content>
+            <Button.RenderTransform>
+                <CompositeTransform/>
+            </Button.RenderTransform>
+        </Button>
+        <StackPanel x:Name="sp1"  Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
+                    CornerRadius="5" Background="White">
+            <StackPanel.RenderTransform>
+                <CompositeTransform></CompositeTransform>
+            </StackPanel.RenderTransform>
+        </StackPanel>
+        
+        <!--Paneles de entrenamiento y mejoras-->
         <Grid Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition ></RowDefinition>
                 <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
-        <ListView x:Name="Mejoras" Grid.Row="1" Background="White" Visibility="Collapsed">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Assets/skin1.png"></Image>
-                        <StackPanel>
-                            <TextBlock>Construccion 1</TextBlock>
-                            <TextBlock>Nivel 1</TextBlock>
-                        </StackPanel>
-                        <StackPanel>
+            
+            <!--Panel de mejoras-->
+            <ListView x:Name="Mejoras" Grid.Row="1" Background="White" Visibility="Collapsed">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Assets/skin1.png"></Image>
                             <StackPanel>
-                                <Image Source="Assets/moneda.png"></Image>
-                                <TextBlock>100</TextBlock>
+                                <TextBlock>Construccion 1</TextBlock>
+                                <TextBlock>Nivel 1</TextBlock>
                             </StackPanel>
-                            <Button>Mejorar</Button>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView x:Name="Construccion" Grid.Row="1" Background="White" Visibility="Collapsed">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Assets/skin1.png"></Image>
-                        <StackPanel>
-                            <TextBlock>Construccion 1</TextBlock>
-                            <TextBlock>Nivel 1</TextBlock>
-                        </StackPanel>
-                        <StackPanel>
                             <StackPanel>
-                                <Image Source="Assets/moneda.png"></Image>
-                                <TextBlock>100</TextBlock>
+                                <StackPanel>
+                                    <Image Source="Assets/moneda.png"></Image>
+                                    <TextBlock>100</TextBlock>
+                                </StackPanel>
+                                <Button>Mejorar</Button>
                             </StackPanel>
-                            <Button Content="Construir"></Button>
                         </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <!--Panel de construccion-->
+            <ListView x:Name="Construccion" Grid.Row="1" Background="White" Visibility="Collapsed">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Assets/skin1.png"></Image>
+                            <StackPanel>
+                                <TextBlock>Construccion 1</TextBlock>
+                                <TextBlock>Nivel 1</TextBlock>
+                            </StackPanel>
+                            <StackPanel>
+                                <StackPanel>
+                                    <Image Source="Assets/moneda.png"></Image>
+                                    <TextBlock>100</TextBlock>
+                                </StackPanel>
+                                <Button Content="Construir"></Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <!--Tabs-->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed">
                 <Button x:Name="ConstruirTab" Content="Construir"></Button>
                 <Button x:Name="MejorarTab" Content="Mejorar"></Button>
             </StackPanel>
+            
         </Grid>
+
+        <!--Botones de entrenamiento y pelea-->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0">
+            <!--Boton de ataque-->
+            <Button x:Name="AttackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="60" MinWidth="60">
+                <Button.Content>
+                    <Image Source="Assets/Attack-Button.png" Stretch="Uniform"/>
+                </Button.Content>
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+            </Button>
+            
+            <!--Boton de entrenamiento-->
+            <Button x:Name="TrainButton"  MinHeight="60" Click="TrainButton_Click">
+                <Button.Content>
+                    <Image Source="Assets/train-Button.png" Stretch="Uniform"/>
+                </Button.Content>
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+            </Button>
+        </StackPanel>
+        
+        <StackPanel x:Name="sp2"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
+                    CornerRadius="5"  Background="White">
+            <StackPanel.RenderTransform>
+                <CompositeTransform ></CompositeTransform>
+            </StackPanel.RenderTransform>
+        </StackPanel>
+        
+        <!--Panel de entrenamiento-->
         <ListView x:Name="Entrano" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Background="White" Visibility="Collapsed">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -211,6 +258,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <!--Barras de recursos-->
         <Image Source="Assets/oro.png" Grid.Column="3"/>
         <Image Source="Assets/sangre.png" Grid.Column="4"/>
         <Image Source="Assets/pobacion.png" Grid.Column="5"/>

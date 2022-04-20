@@ -119,6 +119,7 @@
     <Compile Include="Aldea.xaml.cs">
       <DependentUpon>Aldea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mensaje.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="opciones.xaml.cs">
       <DependentUpon>opciones.xaml</DependentUpon>

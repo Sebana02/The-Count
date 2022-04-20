@@ -24,6 +24,7 @@ namespace The_Count
     public sealed partial class Aldea : Page
     {
         bool constructOpen = false, trainOpen = false;
+        bool notifOut = false;
         DispatcherTimer constructTimer, trainTiemr;
         public Aldea()
         {
@@ -55,6 +56,11 @@ namespace The_Count
         private void ContructButton_Click(object sender, RoutedEventArgs e)
         {
             moveConstruct();
+        }
+        private void NewsButton_Click(object sender, RoutedEventArgs e)
+        {
+            notifOut = !notifOut;
+            Notificaciones.Visibility = notifOut ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void moveConstruct()
@@ -154,6 +160,9 @@ namespace The_Count
             }
 
         }
+
+        
+
         private void moveTrainIn(object sender, object e)
         {
             var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
