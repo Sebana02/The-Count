@@ -34,8 +34,7 @@ namespace The_Count
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (Frame.CanGoBack)
-                Frame.GoBack();
+            Frame.Navigate(typeof(Principal));
         }
     }
 }
