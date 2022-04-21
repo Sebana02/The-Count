@@ -30,7 +30,7 @@
 
 
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="RootGrid">
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

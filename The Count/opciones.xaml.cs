@@ -27,11 +27,22 @@ namespace The_Count
         public opciones()
         {
             this.InitializeComponent();
+
+            Loaded += (s, e) =>
+             {
+                 var player = (App.Current as App).snd;
+                 RootGrid.Children.Add(player);
+             };
         }
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            volumeText.Text = (sender as Slider).Value.ToString();
+            double volume = (sender as Slider).Value;
+            volumeText.Text = volume.ToString();
+
+            MediaElement player = (App.Current as App).snd;
+            player.Volume = volume / 100.0;
+            //player.Stop();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

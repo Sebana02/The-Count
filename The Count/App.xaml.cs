@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,13 +23,31 @@ namespace The_Count
     /// </summary>
     sealed partial class App : Application
     {
+        public MediaElement snd { get; set; }
+
         /// <summary>
         /// Inicializa el objeto de aplicación Singleton. Esta es la primera línea de código creado
         /// ejecutado y, como tal, es el equivalente lógico de main() o WinMain().
         /// </summary>
+        /// 
+        private async void PlaySound()
+        {
+            var package = Windows.ApplicationModel.Package.Current;
+            var installedLocation = package.InstalledLocation;
+            var storageFile = await installedLocation.GetFileAsync("Assets\\music.mp3");
+            if (storageFile != null)
+            {
+                var stream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                snd = new MediaElement();
+                snd.SetSource(stream, storageFile.ContentType);
+                snd.AutoPlay = true
+                snd.Play();
+            }
+        }
         public App()
         {
             this.InitializeComponent();
+            PlaySound();
             this.Suspending += OnSuspending;
         }
 
@@ -49,7 +68,7 @@ namespace The_Count
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-                
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Cargar el estado de la aplicación suspendida previamente
@@ -66,8 +85,11 @@ namespace The_Count
                     // Cuando no se restaura la pila de navegación, navegar a la primera página,
                     // configurando la nueva página pasándole la información requerida como
                     //parámetro de navegación
-                    rootFrame.Navigate(typeof(Aldea), e.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+
+
+
                 // Asegurarse de que la ventana actual está activa.
                 Window.Current.Activate();
             }

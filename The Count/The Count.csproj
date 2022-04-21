@@ -164,6 +164,7 @@
     <Content Include="Assets\gota.png" />
     <Content Include="Assets\Login.png" />
     <Content Include="Assets\moneda.png" />
+    <Content Include="Assets\music.mp3" />
     <Content Include="Assets\noti.PNG" />
     <Content Include="Assets\notis.PNG" />
     <Content Include="Assets\opciones.png" />
