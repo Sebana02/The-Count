@@ -37,7 +37,6 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-
         <!--Fondo-->
         <Image Source="Assets/Aldea-hélices.jpg" Grid.ColumnSpan="10" Grid.RowSpan="3" Stretch="Fill"/>
         <!--Opacidad del fondo para el menu-->
@@ -101,7 +100,7 @@
             <ListView x:Name="ChatPanel"
                     BorderThickness="2"
                     BorderBrush="Black"
-                      CornerRadius="5"
+                    CornerRadius="5"
                     Grid.ColumnSpan="2"
                     SelectionMode="None" 
                     Background="White"
@@ -266,30 +265,37 @@
         
         <StackPanel x:Name="sp2"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="2"
-                    CornerRadius="5"  Background="White">
+                    CornerRadius="5"  Background="White" Visibility="Collapsed">
             <StackPanel.RenderTransform>
                 <CompositeTransform ></CompositeTransform>
             </StackPanel.RenderTransform>
         </StackPanel>
         
         <!--Panel de entrenamiento-->
-        <ListView x:Name="Entrano" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Background="White" Visibility="Collapsed">
+        <ListView x:Name="Entrano" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+                  Background="White" Visibility="Visible" ItemsSource="{x:Bind TroopsList, Mode=OneWay}"
+                  SelectionMode="None" CornerRadius="5" x:DefaultBindMode="OneWay">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Assets/tropa.png"></Image>
-                        <StackPanel>
-                            <TextBlock>Tropa 1</TextBlock>
-                            <TextBlock>Nivel 1</TextBlock>
-                        </StackPanel>
-                        <StackPanel>
-                            <StackPanel>
-                                <Image Source="Assets/gota.png"></Image>
-                                <TextBlock>100</TextBlock>
-                            </StackPanel>
-                            <Button Content="Construir"></Button>
-                        </StackPanel>
-                    </StackPanel>
+                <DataTemplate x:DataType="local:Tropa">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/tropa.png" Stretch="Fill" Grid.RowSpan="2" VerticalAlignment="Center" x:DefaultBindMode="OneWay"></Image>
+                        <TextBlock Text="{x:Bind Id, Mode=OneWay}" Visibility="Collapsed" x:DefaultBindMode="OneWay"/>
+                        <TextBlock Text="{x:Bind Nombre,Mode=OneWay}" Grid.Column="1" VerticalAlignment="Center" x:DefaultBindMode="OneWay"></TextBlock>
+                        <TextBlock Text="{x:Bind Nivel, Mode=OneWay}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" x:DefaultBindMode="OneWay"></TextBlock>
+                        <Image Source="Assets/gota.png" Stretch="Fill" Grid.Column="2" VerticalAlignment="Center" x:DefaultBindMode="OneWay"></Image>
+                        <TextBlock Text="{x:Bind Precio, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="3" x:DefaultBindMode="OneWay"></TextBlock>
+                        <Button  Content="{x:Bind Estado, Mode=OneWay}" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" Click="TrainEnhanceButton_Click"></Button>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

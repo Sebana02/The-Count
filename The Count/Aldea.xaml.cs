@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace The_Count
     {
         bool constructOpen = false, trainOpen = false;
         bool notifOut = false, chatOut = false;
+        ObservableCollection<Tropa> TroopsList = new ObservableCollection<Tropa>();
         DispatcherTimer constructTimer, trainTiemr;
         public Aldea()
         {
@@ -36,8 +38,11 @@ namespace The_Count
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
                 sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
             };
-
-           
+            for (int i = 0; i < 5; i++)
+            {
+                TroopsList.Add(new Tropa(100 * (i+1)));
+            }
+        
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
@@ -82,6 +87,15 @@ namespace The_Count
             {
                 SendMessage();
             }
+        }
+
+        private void TrainEnhanceButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var grid = button.Parent as Grid;
+            var id = int.Parse((grid.Children[1] as TextBlock).Text);
+            TroopsList[id].addLevel();
+            
         }
         private void SendMessage()
         {
@@ -187,8 +201,6 @@ namespace The_Count
             }
 
         }
-
-
         private void moveTrainIn(object sender, object e)
         {
             var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
