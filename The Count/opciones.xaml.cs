@@ -27,12 +27,6 @@ namespace The_Count
         public opciones()
         {
             this.InitializeComponent();
-
-            Loaded += (s, e) =>
-             {
-                 var player = (App.Current as App).snd;
-                 RootGrid.Children.Add(player);
-             };
         }
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -42,7 +36,7 @@ namespace The_Count
 
             MediaElement player = (App.Current as App).snd;
             player.Volume = volume / 100.0;
-            //player.Stop();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

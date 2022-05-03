@@ -8,19 +8,36 @@ using Windows.UI.Xaml;
 
 namespace The_Count
 {
-    public class Tropa : INotifyPropertyChanged
+    public class Tropa : ObservableObject
     {
         private static int NumeroTropa = 0;
         public string Nombre { get; private set; }
-        public int Precio { get; private set; }
+
+        private int precio_;
+        public int Precio
+        {
+            get { return precio_; }
+            set {Set(ref precio_, value);}
+        }
+
         private int nivel = 0;
-        public string Nivel { get; private set; }
-        public string Estado { get; private set; }
+
+        private string nivel_;
+        public string Nivel
+        {
+            get { return nivel_; }
+            set { Set(ref nivel_, value); }
+        }
+
+        private string estado_;
+        public string Estado
+        {
+            get { return estado_; }
+            set { Set(ref estado_, value); }
+        }
+
         private static int id = 0;
         public int Id;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private DispatcherTimer _timer;
 
         public Tropa(int precio)
         {
@@ -30,16 +47,6 @@ namespace The_Count
             Estado = "Comprar";
             Id = id++;
 
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.001) };
-
-            _timer.Tick += (sender, o) =>
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Precio)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Nivel)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Estado)));
-            };
-
-            _timer.Start();
         }
 
         public void addLevel()
