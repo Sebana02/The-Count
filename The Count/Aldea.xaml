@@ -172,7 +172,77 @@
             </Button.Content>
         </Button>
         <!--Menu de noticias-->
-        <GridView x:Name="Notificaciones" ItemsSource="123456789ABCD" Background="White" Grid.Column="3"  Grid.ColumnSpan="3" Grid.Row="1" Visibility="Collapsed"/>
+        <Border x:Name="Notificaciones" Visibility="Collapsed"  Grid.Column="3" 
+                      Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="2" BorderBrush="Black" CornerRadius="5">
+            <Grid  Background="White"
+                           >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.20*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.10*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.10*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.ColumnSpan="3" Background="Gray" BorderBrush="Black" BorderThickness="0,0,0,2">
+                    <Viewbox>
+
+                        <RichTextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Paragraph>Noticias</Paragraph>
+                        </RichTextBlock>
+
+                    </Viewbox>
+                </Border>
+
+
+                <Button Click="NewsButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Background="Gray" BorderBrush="Black" BorderThickness="2,0,0,2" Grid.Column="3" CornerRadius="0">
+                    <Viewbox>
+                        <Image Source="Assets/x.png" Stretch="Fill" ></Image>
+                    </Viewbox>
+                </Button>
+
+
+                <ListView  ItemsSource="12345" Background="White" Grid.Row="1" Grid.ColumnSpan="3" SelectionMode="None">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel 
+                                  HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="00,10"  Padding="50,0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.10*"></RowDefinition>
+                                    <RowDefinition Height="2*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel  BorderBrush="Black" BorderThickness="2" CornerRadius="5" >
+                                    <StackPanel BorderBrush="Black" BorderThickness="0,0,0,2" Background="Gray">
+                                        <TextBlock  Text="Noticia" FontSize="20" HorizontalAlignment="Center" ></TextBlock>
+                                    </StackPanel>
+                                    <RichTextBlock  Grid.Row="1" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch" FontSize="18" HorizontalTextAlignment="Justify" Padding="10">
+
+                                        <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                                        </Paragraph>
+                                    </RichTextBlock>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
 
 
 
