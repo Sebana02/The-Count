@@ -10,7 +10,7 @@ namespace The_Count
 {
     public class Tropa : ObservableObject
     {
-        private static int NumeroTropa = 0;
+        public static int NumeroTropa = 0;
         public string Nombre { get; private set; }
 
         private int precio_;
@@ -36,7 +36,7 @@ namespace The_Count
             set { Set(ref estado_, value); }
         }
 
-        private static int id = 0;
+        public static int id = 0;
         public int Id;
 
         public Tropa(int precio)

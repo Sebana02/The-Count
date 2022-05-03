@@ -156,6 +156,7 @@
     <Content Include="Assets\ataque.PNG" />
     <Content Include="Assets\Attack-Button.png" />
     <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\Build.png" />
     <Content Include="Assets\busqueda.PNG" />
     <Content Include="Assets\Captura.PNG" />
     <Content Include="Assets\chat.PNG" />
@@ -179,6 +180,7 @@
     <Content Include="Assets\titulo.png" />
     <Content Include="Assets\train-button.png" />
     <Content Include="Assets\tropa.png" />
+    <Content Include="Assets\x.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

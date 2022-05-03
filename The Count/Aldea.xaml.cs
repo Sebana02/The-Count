@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,23 +27,37 @@ namespace The_Count
     {
         bool constructOpen = false, trainOpen = false;
         bool notifOut = false, chatOut = false;
+        bool attacking = false;
         ObservableCollection<Tropa> TroopsList = new ObservableCollection<Tropa>();
         DispatcherTimer constructTimer, trainTiemr;
+
         public Aldea()
         {
             this.InitializeComponent();
             Window.Current.CoreWindow.SizeChanged += OnWindowSizeChanged;
+
+
             AddItemToEndChat("Hola!");
+
             Loaded += (s, e) =>
             {
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
                 sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
             };
+
+            addTroops();
+
+        }
+
+        private void addTroops()
+        {
+            //reset an add tropas
+            Tropa.id = 0;
+            Tropa.NumeroTropa = 0;
             for (int i = 0; i < 5; i++)
             {
-                TroopsList.Add(new Tropa(100 * (i+1)));
+                TroopsList.Add(new Tropa(100 * (i + 1)));
             }
-        
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
@@ -92,10 +107,9 @@ namespace The_Count
         private void TrainEnhanceButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var grid = button.Parent as Grid;
-            var id = int.Parse((grid.Children[1] as TextBlock).Text);
-            TroopsList[id].addLevel();
-            
+            var sp = button.Parent as StackPanel;
+            var id = int.Parse((sp.Children[0] as TextBlock).Text);
+            TroopsList[id]?.addLevel();
         }
         private void SendMessage()
         {
@@ -201,6 +215,32 @@ namespace The_Count
             }
 
         }
+
+        private void Build_Button(object sender, RoutedEventArgs e)
+        {
+            Construccion.Visibility = Visibility.Visible;
+            Mejoras.Visibility = Visibility.Collapsed;
+        }
+
+        private void Improve_Button(object sender, RoutedEventArgs e)
+        {
+            Construccion.Visibility = Visibility.Collapsed;
+            Mejoras.Visibility = Visibility.Visible;
+        }
+
+        private void AttackButton_Click(object sender, RoutedEventArgs e)
+        {
+            attacking = !attacking;
+
+            var button = sender as Button;
+            Busca.Visibility = attacking ? Visibility.Visible : Visibility.Collapsed;
+
+            if (!attacking)
+                (button.Content as Image).Source = new BitmapImage(new Uri("ms-appx:///Assets/Attack-Button.png"));
+            else
+                (button.Content as Image).Source = new BitmapImage(new Uri("ms-appx:///Assets/x.png"));
+        }
+
         private void moveTrainIn(object sender, object e)
         {
             var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
@@ -219,7 +259,7 @@ namespace The_Count
                 AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)AttackButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
             }
         }
-        private void OnWindowSizeChanged(object sender,Windows.UI.Core.WindowSizeChangedEventArgs e)
+        private void OnWindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
             if (constructTimer != null)
             {
