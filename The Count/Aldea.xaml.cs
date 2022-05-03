@@ -29,6 +29,7 @@ namespace The_Count
         bool notifOut = false, chatOut = false;
         bool attacking = false;
         ObservableCollection<Tropa> TroopsList = new ObservableCollection<Tropa>();
+        ObservableCollection<Edificio> BuildsList = new ObservableCollection<Edificio>();
         DispatcherTimer constructTimer, trainTiemr;
 
         public Aldea()
@@ -46,6 +47,7 @@ namespace The_Count
             };
 
             addTroops();
+            addBuildings();
 
         }
 
@@ -54,9 +56,20 @@ namespace The_Count
             //reset an add tropas
             Tropa.id = 0;
             Tropa.NumeroTropa = 0;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 TroopsList.Add(new Tropa(100 * (i + 1)));
+            }
+        }
+
+        private void addBuildings()
+        {
+            //reset an add tropas
+            Edificio.id = 0;
+            Edificio.NumeroEdificio = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                BuildsList.Add(new Edificio(100 * (i + 1)));
             }
         }
 
@@ -109,7 +122,7 @@ namespace The_Count
             var button = sender as Button;
             var sp = button.Parent as StackPanel;
             var id = int.Parse((sp.Children[0] as TextBlock).Text);
-            TroopsList[id]?.addLevel();
+            TroopsList[id].addLevel();
         }
         private void SendMessage()
         {
@@ -239,6 +252,14 @@ namespace The_Count
                 (button.Content as Image).Source = new BitmapImage(new Uri("ms-appx:///Assets/Attack-Button.png"));
             else
                 (button.Content as Image).Source = new BitmapImage(new Uri("ms-appx:///Assets/x.png"));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var sp = button.Parent as StackPanel;
+            var id = int.Parse((sp.Children[0] as TextBlock).Text);
+            BuildsList[id].addLevel();
         }
 
         private void moveTrainIn(object sender, object e)

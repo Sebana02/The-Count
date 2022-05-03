@@ -19,7 +19,8 @@
             <Setter Property="Width" Value="Auto"/>
         </Style>
     </Page.Resources>
-    <Grid>
+    
+    <Grid x:Name="MiCanvas">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -208,24 +209,25 @@
             <!--Paneles de entrenamiento y mejoras-->
 
             <!--Panel de mejoras-->
-            <ScrollViewer  x:Name="Mejoras" Visibility="Visible" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
-                <ListView Background="White" ItemsSource="123456789"
+            <ScrollViewer x:Name="Mejoras" Visibility="Collapsed" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
+                <ListView Background="White" ItemsSource="{x:Bind BuildsList, Mode=OneWay}"
                           SelectionMode="None" CornerRadius="5">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:Edificio">
                             <Viewbox>
                                 <StackPanel Orientation="Horizontal" >
                                     <Image Source="Assets/skin1.png" MaxWidth="100"></Image>
                                     <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center">Construccion 1</TextBlock>
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center">Nivel 1</TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Bind Id, Mode=OneWay}" Visibility="Collapsed"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Image Source="Assets/moneda.png" Stretch="Fill" MaxWidth="40"></Image>
-                                            <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="25">100</TextBlock>
+                                            <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="25" Text="{x:Bind Precio, Mode=OneWay}" ></TextBlock>
                                         </StackPanel>
-                                        <Button Content="Mejorar" Background="Green"></Button>
+                                        <Button Content="Mejorar" Background="Green" Click="Button_Click"></Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Viewbox>
@@ -235,22 +237,23 @@
             </ScrollViewer>
 
             <!--Panel de construccion-->
-            <ScrollViewer x:Name="Construccion" Visibility="Collapsed" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
-                <ListView Background="White"  ItemsSource="123456789"
+            <ScrollViewer x:Name="Construccion" Visibility="Visible" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
+                <ListView Background="White" ItemsSource="{x:Bind BuildsList, Mode=OneWay}"
                           SelectionMode="None" CornerRadius="5">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="local:Edificio">
                             <Viewbox>
                                 <StackPanel Orientation="Horizontal" >
                                     <Image Source="Assets/skin1.png" MaxWidth="100"></Image>
                                     <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center">Construccion 1</TextBlock>
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center">Nivel 1</TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{x:Bind Id, Mode=OneWay}" Visibility="Collapsed"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Image Source="Assets/moneda.png" Stretch="Fill" MaxWidth="40"></Image>
-                                            <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="25">100</TextBlock>
+                                            <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="25" Text="{x:Bind Precio, Mode=OneWay}" ></TextBlock>
                                         </StackPanel>
                                         <Button Content="Construir" Background="Green"></Button>
                                     </StackPanel>
@@ -298,7 +301,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
                 <ListView x:Name="Entrenar" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
                   Background="White" Visibility="Visible" ItemsSource="{x:Bind TroopsList, Mode=OneWay}"
-                  SelectionMode="None" CornerRadius="5">
+                   CornerRadius="5">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Tropa">
                             <Viewbox>
