@@ -33,11 +33,12 @@
 
         <DataTemplate x:Key="aspectos"
                       x:DataType="local:SkinDesc">
-            <StackPanel Style="{StaticResource aldeaBig}" Background="{x:Bind color,Mode=TwoWay}">
-                <TextBlock Style="{StaticResource text}" Text="{x:Bind nombre}"/>
-                <Image Source="{x:Bind image}"/>
-            </StackPanel>
-
+            <Viewbox>
+                <StackPanel Style="{StaticResource aldeaBig}" Background="{x:Bind color,Mode=TwoWay}">
+                    <TextBlock Style="{StaticResource text}" Text="{x:Bind nombre}"/>
+                    <Image Source="{x:Bind image}"/>
+                </StackPanel>
+            </Viewbox>
         </DataTemplate>
 
     </Page.Resources>
