@@ -226,7 +226,8 @@
                                         <TextBlock  Text="Noticia" FontSize="20" HorizontalAlignment="Center" ></TextBlock>
                                     </StackPanel>
                                     <RichTextBlock  Grid.Row="1" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Stretch" FontSize="18" HorizontalTextAlignment="Justify" Padding="10">
+                                               VerticalAlignment="Stretch" FontSize="18" HorizontalTextAlignment="Justify" Padding="10"
+                                                    Foreground="Black">
 
                                         <Paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 

@@ -72,8 +72,8 @@
             <TextBox x:Name="user" PlaceholderText="Usuario" 
                 PlaceholderForeground="Gray" 
                 Style="{StaticResource small}"></TextBox>
-            
-            <PasswordBox x:Name="password" PlaceholderText="Contraseña" PasswordChar="*"
+
+            <PasswordBox x:Name="password" PlaceholderText="Contraseña" Foreground="Black" PasswordChar="*"
                 Style="{StaticResource small}"></PasswordBox>
             
         </StackPanel>
