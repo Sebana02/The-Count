@@ -39,8 +39,46 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <!--Fondo-->
-        <Image Source="Assets/Aldea-hélices.jpg" Grid.ColumnSpan="10" Grid.RowSpan="3" Stretch="Fill"/>
+        <!--Canvas de tropas-->
+        <Image x:Name="MiMapa" Source="Assets/Aldea-hélices.jpg"   AllowDrop="True" Drop="TroopCanvas_Drop" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="10" Grid.RowSpan="3" DragOver="TroopCanvas_DragOver"/>
+        
+        <Canvas x:Name="TroopCanvas"    
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="10">
+            
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10" Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
+                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
+            </ContentControl>
+        </Canvas>
+        
+
+
         <!--Opacidad del fondo para el menu-->
         <Rectangle x:Name="MenuBackground" Fill="Black" Opacity="0.7" Visibility="Collapsed"  Grid.ColumnSpan="10" Grid.RowSpan="10"/>
 
@@ -277,7 +315,7 @@
                 </StackPanel>
             </Viewbox>
 
-            <!--Paneles de entrenamiento y mejoras-->
+            <!--Paneles de construccion y mejoras-->
 
             <!--Panel de mejoras-->
             <ScrollViewer x:Name="Mejoras" Visibility="Collapsed" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
@@ -372,12 +410,14 @@
             <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
                 <ListView x:Name="Entrenar" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
                   Background="White" Visibility="Visible" ItemsSource="{x:Bind TroopsList, Mode=OneWay}"
-                   CornerRadius="5">
+                   CornerRadius="5" CanDragItems="True" DragItemsStarting="Entrenar_DragItemsStarting">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Tropa">
                             <Viewbox>
                                 <StackPanel Orientation="Horizontal" >
-                                    <Image Source="Assets/tropa.png" MaxWidth="100"></Image>
+                                    <ContentControl>
+                                        <Image Source="Assets/tropa.png" MaxWidth="100"></Image>
+                                    </ContentControl>
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
                                         <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
@@ -405,6 +445,8 @@
                 <TextBlock Text="Buscando oponente . . ."   Foreground="White"  FontSize="25" />
             </StackPanel>
         </Viewbox>
+
+       
 
 
         <!--Barras de recursos-->

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -260,6 +261,41 @@ namespace The_Count
             var sp = button.Parent as StackPanel;
             var id = int.Parse((sp.Children[0] as TextBlock).Text);
             BuildsList[id].addLevel();
+        }
+
+        private async void TroopCanvas_Drop(object sender, DragEventArgs e)
+        {
+            var id = await e.DataView.GetTextAsync();
+            var TropaCanvas = TroopCanvas.Children[int.Parse(id)] as ContentControl;
+            if (TropaCanvas.Visibility == Visibility.Collapsed) TropaCanvas.Visibility = Visibility.Visible;
+            Point pos = e.GetPosition(MiMapa);
+            CompositeTransform t = new CompositeTransform();
+            t.TranslateX = pos.X - 60;
+            t.TranslateY = pos.Y - 60;
+            TropaCanvas.RenderTransform = t;
+           
+        }
+
+        private void TroopCanvas_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Move;
+        }
+
+        private void Entrenar_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        {
+            Tropa item = e.Items[0] as Tropa;
+            string id = item.Id.ToString();
+            e.Data.SetText(id);
+            e.Data.RequestedOperation = DataPackageOperation.Move;
+        }
+
+        private void ContentControl_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+            var imagen = sender as ContentControl;
+            CompositeTransform t = imagen.RenderTransform as CompositeTransform;
+            t.TranslateX += e.Delta.Translation.X;
+            t.TranslateY += e.Delta.Translation.Y;
         }
 
         private void moveTrainIn(object sender, object e)
