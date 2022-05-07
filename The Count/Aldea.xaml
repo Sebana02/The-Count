@@ -20,7 +20,7 @@
         </Style>
     </Page.Resources>
     
-    <Grid x:Name="MiCanvas">
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -40,41 +40,13 @@
         </Grid.RowDefinitions>
 
         <!--Canvas de tropas-->
-        <Image x:Name="MiMapa" Source="Assets/Aldea-hélices.jpg"   AllowDrop="True" Drop="TroopCanvas_Drop" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="10" Grid.RowSpan="3" DragOver="TroopCanvas_DragOver"/>
+        <Image x:Name="MiMapa" Source="Assets/Aldea-hélices.jpg"   AllowDrop="True" Drop="TroopCanvas_Drop" 
+               Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="10" 
+               Grid.RowSpan="3" DragOver="TroopCanvas_DragOver" Canvas.ZIndex="0"/>
         
         <Canvas x:Name="TroopCanvas"    
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="10">
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10" Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
-            <ContentControl Canvas.ZIndex="10"  Visibility="Collapsed" ManipulationMode="All" ManipulationDelta="ContentControl_ManipulationDelta">
-                <Image Source="Assets/tropa.png" MaxWidth="100" ></Image>
-            </ContentControl>
         </Canvas>
         
 
@@ -209,6 +181,7 @@
                 </Viewbox>
             </Button.Content>
         </Button>
+        
         <!--Menu de noticias-->
         <Border x:Name="Notificaciones" Visibility="Collapsed"  Grid.Column="3" 
                       Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="2" BorderBrush="Black" CornerRadius="5">
@@ -320,11 +293,11 @@
             <!--Panel de mejoras-->
             <ScrollViewer x:Name="Mejoras" Visibility="Collapsed" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
                 <ListView Background="White" ItemsSource="{x:Bind BuildsList, Mode=OneWay}"
-                          SelectionMode="None" CornerRadius="5">
+                          SelectionMode="None" CornerRadius="5" ChoosingItemContainer="listview1_ChoosingItemContainer" >
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Edificio">
                             <Viewbox>
-                                <StackPanel Orientation="Horizontal" >
+                                <StackPanel Orientation="Horizontal" TabFocusNavigation="Once" >
                                     <Image Source="Assets/skin1.png" MaxWidth="100"></Image>
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
@@ -346,17 +319,19 @@
             </ScrollViewer>
 
             <!--Panel de construccion-->
-            <ScrollViewer x:Name="Construccion" Visibility="Visible" Grid.Row="1"  VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
+            <ScrollViewer x:Name="Construccion" Visibility="Visible" Grid.Row="1"  VerticalScrollBarVisibility="Visible" 
+                          VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
                 <ListView Background="White" ItemsSource="{x:Bind BuildsList, Mode=OneWay}"
-                          SelectionMode="None" CornerRadius="5">
+                          SelectionMode="None" CornerRadius="5" ChoosingItemContainer="listview1_ChoosingItemContainer">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Edificio">
                             <Viewbox>
                                 <StackPanel Orientation="Horizontal" >
                                     <Image Source="Assets/skin1.png" MaxWidth="100"></Image>
                                     <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
-                                        <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="20" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="20" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
+                                        <TextBlock Foreground="Black" FontSize="20" HorizontalAlignment="Center" Text="{x:Bind Construidos, Mode=OneWay}"></TextBlock>
                                     </StackPanel>
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="{x:Bind Id, Mode=OneWay}" Visibility="Collapsed"/>
@@ -364,7 +339,7 @@
                                             <Image Source="Assets/moneda.png" Stretch="Fill" MaxWidth="40"></Image>
                                             <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="25" Text="{x:Bind Precio, Mode=OneWay}" ></TextBlock>
                                         </StackPanel>
-                                        <Button Content="Construir" Background="Green"></Button>
+                                        <Button x:Name="Boton_Construir" Content="Construir" Background="Green" Click="Boton_Construir_Click"></Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Viewbox>
@@ -407,17 +382,18 @@
             </Grid.RenderTransform>
 
             <!--Panel de entrenamiento-->
-            <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
+            <ScrollViewer VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" 
+                          HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" >
                 <ListView x:Name="Entrenar" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
                   Background="White" Visibility="Visible" ItemsSource="{x:Bind TroopsList, Mode=OneWay}"
-                   CornerRadius="5" CanDragItems="True" DragItemsStarting="Entrenar_DragItemsStarting">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="local:Tropa">
+                   CornerRadius="5" CanDragItems="True" DragItemsStarting="Entrenar_DragItemsStarting" SelectionMode="None" IsTabStop="{x:Bind trainOpen, Mode=OneWay}"
+                    TabNavigation="Local" ChoosingItemContainer="listview1_ChoosingItemContainer">
+                    
+                    <ListView.ItemTemplate >
+                        <DataTemplate x:DataType="local:Tropa" >
                             <Viewbox>
-                                <StackPanel Orientation="Horizontal" >
-                                    <ContentControl>
-                                        <Image Source="Assets/tropa.png" MaxWidth="100"></Image>
-                                    </ContentControl>
+                                <StackPanel Orientation="Horizontal" TabFocusNavigation="Cycle">
+                                    <Image Source="Assets/tropa.png" MaxWidth="100"></Image>
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nombre,Mode=OneWay}"></TextBlock>
                                         <TextBlock Foreground="Black" FontSize="25" HorizontalAlignment="Center" Text="{x:Bind Nivel, Mode=OneWay}"></TextBlock>
@@ -428,7 +404,7 @@
                                             <Image Source="Assets/gota.png" Stretch="Fill" MaxWidth="40" ></Image>
                                             <TextBlock Text="{x:Bind Precio, Mode=OneWay}" VerticalAlignment="Center" Foreground="Black" FontSize="25"></TextBlock>
                                         </StackPanel>
-                                        <Button Content="{x:Bind Estado, Mode=OneWay}" Background="Green" Click="TrainEnhanceButton_Click"></Button>
+                                        <Button IsTabStop="True" Content="{x:Bind Estado, Mode=OneWay}" Background="Green" Click="TrainEnhanceButton_Click"></Button>
                                     </StackPanel>
                                 </StackPanel>
 
@@ -439,15 +415,13 @@
                 </ListView>
             </ScrollViewer>
         </Grid>
+        <!--Buscando oponentes-->
         <Viewbox x:Name="Busca" Visibility="Collapsed" Grid.Row="1" 
                    Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
             <StackPanel Background="Gray" Opacity="0.85" Padding="20" CornerRadius="20">
                 <TextBlock Text="Buscando oponente . . ."   Foreground="White"  FontSize="25" />
             </StackPanel>
         </Viewbox>
-
-       
-
 
         <!--Barras de recursos-->
         <Image Source="Assets/oro.png" Grid.Column="3"/>

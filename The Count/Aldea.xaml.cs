@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,6 +51,11 @@ namespace The_Count
             addTroops();
             addBuildings();
 
+            for (int i = 0; i < 10; i++)
+            {
+                
+            }
+
         }
 
         private void addTroops()
@@ -59,7 +65,22 @@ namespace The_Count
             Tropa.NumeroTropa = 0;
             for (int i = 0; i < 10; i++)
             {
+                //ListView de entrenamiento
                 TroopsList.Add(new Tropa(100 * (i + 1)));
+
+                //Tropas del canvas
+                ContentControl c = new ContentControl();
+                c.Content = new Image();
+                (c.Content as Image).Source = new BitmapImage(new Uri("ms-appx:///Assets/tropa.png"));
+                (c.Content as Image).MaxWidth = 100;
+                c.Visibility = Visibility.Collapsed;
+                c.IsTabStop = true;
+                c.RenderTransform = new CompositeTransform();
+                c.UseSystemFocusVisuals = true;
+                //Canvas.SetZIndex(c, 1);
+                c.ManipulationMode = ManipulationModes.All;
+                c.ManipulationDelta += ContentControl_ManipulationDelta;
+                TroopCanvas.Children.Add(c);
             }
         }
 
@@ -124,6 +145,7 @@ namespace The_Count
             var sp = button.Parent as StackPanel;
             var id = int.Parse((sp.Children[0] as TextBlock).Text);
             TroopsList[id].addLevel();
+            TroopCanvas.Children[id].Visibility = Visibility.Visible;
         }
         private void SendMessage()
         {
@@ -298,6 +320,108 @@ namespace The_Count
             t.TranslateY += e.Delta.Translation.Y;
         }
 
+        private void OnListViewItemKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            // Code to handle going in/out of nested UI with gamepad and remote only.
+            if (e.Handled == true)
+            {
+                return;
+            }
+
+            var focusedElementAsListViewItem = FocusManager.GetFocusedElement() as ListViewItem;
+            if (focusedElementAsListViewItem != null)
+            {
+                // Focus is on the ListViewItem.
+                // Go in with Right arrow.
+                Control candidate = null;
+
+                switch (e.OriginalKey)
+                {
+                    case Windows.System.VirtualKey.GamepadDPadRight:
+                    case Windows.System.VirtualKey.GamepadLeftThumbstickRight:
+                        var rawPixelsPerViewPixel = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+                        GeneralTransform generalTransform = focusedElementAsListViewItem.TransformToVisual(null);
+                        Point startPoint = generalTransform.TransformPoint(new Point(0, 0));
+                        Rect hintRect = new Rect(startPoint.X * rawPixelsPerViewPixel, startPoint.Y * rawPixelsPerViewPixel, 1, focusedElementAsListViewItem.ActualHeight * rawPixelsPerViewPixel);
+                        candidate = FocusManager.FindNextFocusableElement(FocusNavigationDirection.Right, hintRect) as Control;
+                        break;
+                }
+
+                if (candidate != null)
+                {
+                    candidate.Focus(FocusState.Keyboard);
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                // Focus is inside the ListViewItem.
+                FocusNavigationDirection direction = FocusNavigationDirection.None;
+                switch (e.OriginalKey)
+                {
+                    case Windows.System.VirtualKey.GamepadDPadUp:
+                    case Windows.System.VirtualKey.GamepadLeftThumbstickUp:
+                        direction = FocusNavigationDirection.Up;
+                        break;
+                    case Windows.System.VirtualKey.GamepadDPadDown:
+                    case Windows.System.VirtualKey.GamepadLeftThumbstickDown:
+                        direction = FocusNavigationDirection.Down;
+                        break;
+                    case Windows.System.VirtualKey.GamepadDPadLeft:
+                    case Windows.System.VirtualKey.GamepadLeftThumbstickLeft:
+                        direction = FocusNavigationDirection.Left;
+                        break;
+                    case Windows.System.VirtualKey.GamepadDPadRight:
+                    case Windows.System.VirtualKey.GamepadLeftThumbstickRight:
+                        direction = FocusNavigationDirection.Right;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (direction != FocusNavigationDirection.None)
+                {
+                    Control candidate = FocusManager.FindNextFocusableElement(direction) as Control;
+                    if (candidate != null)
+                    {
+                        ListViewItem listViewItem = sender as ListViewItem;
+
+                        // If the next focusable candidate to the left is outside of ListViewItem,
+                        // put the focus on ListViewItem.
+                        if (direction == FocusNavigationDirection.Left &&
+                            !listViewItem.IsAncestorOf(candidate))
+                        {
+                            listViewItem.Focus(FocusState.Keyboard);
+                        }
+                        else
+                        {
+                            candidate.Focus(FocusState.Keyboard);
+                        }
+                    }
+
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void listview1_ChoosingItemContainer(ListViewBase sender, ChoosingItemContainerEventArgs args)
+        {
+            if (args.ItemContainer == null)
+            {
+                args.ItemContainer = new ListViewItem();
+                args.ItemContainer.KeyDown += OnListViewItemKeyDown;
+            }
+        }
+
+        private void Boton_Construir_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var sp = button.Parent as StackPanel;
+            var id = int.Parse((sp.Children[0] as TextBlock).Text);
+            BuildsList[id].addConstruction();
+
+        }
+
         private void moveTrainIn(object sender, object e)
         {
             var pos = (double)sp2.RenderTransform.GetValue(CompositeTransform.TranslateXProperty);
@@ -360,6 +484,27 @@ namespace The_Count
         private void AddItemToEndChat(string msg)
         {
             ChatPanel.Items.Add(new Mensaje(msg, DateTime.Now, HorizontalAlignment.Right));
+        }
+    }
+
+    public static class DependencyObjectExtensions
+    {
+        public static bool IsAncestorOf(this DependencyObject parent, DependencyObject child)
+        {
+            DependencyObject current = child;
+            bool isAncestor = false;
+
+            while (current != null && !isAncestor)
+            {
+                if (current == parent)
+                {
+                    isAncestor = true;
+                }
+
+                current = VisualTreeHelper.GetParent(current);
+            }
+
+            return isAncestor;
         }
     }
 }

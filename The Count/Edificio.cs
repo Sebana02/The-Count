@@ -29,6 +29,13 @@ namespace The_Count
             set { Set(ref nivel_, value); }
         }
 
+        private int construidos = 0;
+        private string construidos_;
+        public string Construidos
+        {
+            get { return construidos_; }
+            set { Set(ref construidos_, value); }
+        }
         public static int id = 0;
         public int Id;
 
@@ -37,6 +44,7 @@ namespace The_Count
             Nombre = $"Construcción {++NumeroEdificio}";
             Precio = precio;
             Nivel = $"Nivel {nivel}";
+            Construidos = $"{construidos} construidos";
             Id = id++;
 
         }
@@ -46,6 +54,12 @@ namespace The_Count
             nivel++;
             Nivel = $"Nivel {nivel}";
             Precio += 50;
+        }
+
+        public void addConstruction()
+        {
+            construidos++;
+            Construidos = $"{construidos} construidos";
         }
     }
 }
