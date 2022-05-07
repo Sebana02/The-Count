@@ -12,6 +12,7 @@ using Windows.Gaming.Input;
 using Windows.Graphics.Display;
 using Windows.System;
 using Windows.UI.Input;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,7 +36,7 @@ namespace The_Count
         bool attacking = false;
         ObservableCollection<Tropa> TroopsList = new ObservableCollection<Tropa>();
         ObservableCollection<Edificio> BuildsList = new ObservableCollection<Edificio>();
-        DispatcherTimer constructTimer, trainTiemr;
+        DispatcherTimer constructTimer, trainTimer;
 
         PointerPoint ptrPt;
         bool leftPressed;
@@ -58,16 +59,20 @@ namespace The_Count
         public Aldea()
         {
             this.InitializeComponent();
-            Window.Current.CoreWindow.SizeChanged += OnWindowSizeChanged;
 
-
-            AddItemToEndChat("Hola!");
+           AddItemToEndChat("Hola!");
 
             Loaded += (s, e) =>
             {
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
                 sp2.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, -sp2.ActualWidth);
             };
+
+
+            //antes se hacia con el sizechanged de la window pero iba mal
+            sp1.SizeChanged += (s, e) => buildPanelSizeChanged();
+            sp2.SizeChanged += (s, e) => trainPanelSizeChanged();
+
 
             addTroops();
             addBuildings();
@@ -506,9 +511,11 @@ namespace The_Count
 
             if (pos >= sp1.ActualWidth)
             {
-                constructTimer.Stop();
-                constructTimer = null;
-
+                if (constructTimer != null)
+                {
+                    constructTimer.Stop();
+                    constructTimer = null;
+                }
             }
 
             else
@@ -524,9 +531,11 @@ namespace The_Count
 
             if (pos <= 0)
             {
-                constructTimer.Stop();
-                constructTimer = null;
-
+                if (constructTimer != null)
+                {
+                    constructTimer.Stop();
+                    constructTimer = null;
+                }
             }
 
             else
@@ -537,21 +546,21 @@ namespace The_Count
         }
         private void moveTrain()
         {
-            if (trainTiemr != null) return;
+            if (trainTimer != null) return;
 
             if (trainOpen)
             {
-                trainTiemr = new DispatcherTimer();
-                trainTiemr.Tick += moveTrainOut;
-                trainTiemr.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
-                trainTiemr.Start();
+                trainTimer = new DispatcherTimer();
+                trainTimer.Tick += moveTrainOut;
+                trainTimer.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
+                trainTimer.Start();
             }
             else
             {
-                trainTiemr = new DispatcherTimer();
-                trainTiemr.Tick += moveTrainIn;
-                trainTiemr.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
-                trainTiemr.Start();
+                trainTimer = new DispatcherTimer();
+                trainTimer.Tick += moveTrainIn;
+                trainTimer.Interval = new TimeSpan(100); //100000*10^-7s=1cs;
+                trainTimer.Start();
             }
 
             trainOpen = !trainOpen;
@@ -562,8 +571,11 @@ namespace The_Count
 
             if (pos <= -sp2.ActualWidth)
             {
-                trainTiemr.Stop();
-                trainTiemr = null;
+                if (trainTimer != null)
+                {
+                    trainTimer.Stop();
+                    trainTimer = null;
+                }
 
             }
 
@@ -581,8 +593,11 @@ namespace The_Count
 
             if (pos >= 0)
             {
-                trainTiemr.Stop();
-                trainTiemr = null;
+                if (trainTimer != null)
+                {
+                    trainTimer.Stop();
+                    trainTimer = null;
+                }
 
             }
 
@@ -593,7 +608,8 @@ namespace The_Count
                 AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, (double)AttackButton.RenderTransform.GetValue(CompositeTransform.TranslateXProperty) + 5);
             }
         }
-        private void OnWindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+
+        private void buildPanelSizeChanged()
         {
             if (constructTimer != null)
             {
@@ -612,13 +628,14 @@ namespace The_Count
                 sp1.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, sp1.ActualWidth);
                 ContructButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
             }
+        }
 
-
-
-            if (trainTiemr != null)
+        private void trainPanelSizeChanged()
+        {
+            if (trainTimer != null)
             {
-                trainTiemr.Stop();
-                trainTiemr = null;
+                trainTimer.Stop();
+                trainTimer = null;
 
             }
             if (trainOpen)
@@ -634,6 +651,7 @@ namespace The_Count
                 AttackButton.RenderTransform.SetValue(CompositeTransform.TranslateXProperty, 0);
             }
         }
+
         private void AddItemToEndChat(string msg)
         {
             ChatPanel.Items.Add(new Mensaje(msg, DateTime.Now, HorizontalAlignment.Right));
