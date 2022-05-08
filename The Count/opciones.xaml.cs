@@ -27,6 +27,12 @@ namespace The_Count
         public opciones()
         {
             this.InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                var player = (App.Current as App).snd;
+                RootGrid.Children.Add(player);
+            };
         }
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
